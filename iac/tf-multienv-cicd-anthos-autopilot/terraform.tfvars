@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-project_id = "bank-of-anthos-ci"
-region     = "us-central1"
-zone       = "us-central1-b"
+project_id = "active-dahlia-424818-m5"
+region     = "us-east1"
+zone       = "us-east1-b"
 
 repo_owner  = "GoogleCloudPlatform"
 sync_repo   = "bank-of-anthos"

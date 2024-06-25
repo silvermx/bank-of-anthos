@@ -71,13 +71,21 @@ To deploy the CI/CD pipeline, you need:
    export DOMAIN="YOUR_DOMAIN"
    ```
 
-### Setting-up GitHub repository connection
+* ### Setting-up GitHub repository connection
 
-1. Set up a repository connection in Cloud Build:
-   1. Open Cloud Build in Cloud Console (enable its API if needed).
-   1. Navigate to _Triggers_ and set _Region_ to your preferred region.
-   1. Click on _Manage repositories_.
-   1. Click on _Connect repository_ and follow the UI. Do _not_ create a trigger.
+* 1. Set up a repository connection in Cloud Build:
+*   1. Open Cloud Build in Cloud Console (enable its API if needed).
+*   1. Navigate to _Triggers_ and set us-east1 to your preferred region.
+*   1. Click on _Manage repositories_.
+*   1. Click on _Connect repository_ and follow the UI. Do _not_ create a trigger. 
+
+Name: Demo Bank
+Url:https://github.com/
+Organization: Silver Organization
+Generated key: AIzaSyC2C9B-7HU37p1S5hqpD1r365xVhYkIV9g
+
+
+
 1. [Optional] If your Google Cloud organization has the `compute.vmExternalIpAccess` constraint in place, you can reset it on a project level:
    ```sh
    gcloud org-policies reset constraints/compute.vmExternalIpAccess --project=$PROJECT_ID`
@@ -118,12 +126,12 @@ These steps are necessary for all Google Cloud projects that are _not_ `bank-of-
 
 ### Provisioning the infrastructure
 
-1. Create a Cloud Storage bucket in your project to hold your Terraform state.
+- 1. Create a Cloud Storage bucket in your project to hold your Terraform state.
    ```sh
-   gsutil mb gs://${PROJECT_ID}-boa-tf-state
-   gsutil versioning set on gs://${PROJECT_ID}-boa-tf-state
+-   gsutil mb gs://${PROJECT_ID}-boa-tf-state
+-   gsutil versioning set on gs://${PROJECT_ID}-boa-tf-state
    ```
-1. Verify the Terraform variables in `iac/tf-multienv-cicd-anthos-autopilot/terraform.tfvars`. In particular, `project_id` and `region` are set to the same values you used earlier.
+* 1. Verify the Terraform variables in `iac/tf-multienv-cicd-anthos-autopilot/terraform.tfvars`. In particular, `project_id` and `region` are set to the same values you used earlier.
 1. Provision the infrastructure with Terraform.
    ```sh
    # run from iac/tf-multienv-cicd-anthos-autopilot
