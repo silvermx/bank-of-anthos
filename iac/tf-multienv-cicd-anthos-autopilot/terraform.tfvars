@@ -16,6 +16,6 @@ project_id = "active-dahlia-424818-m5"
 region     = "us-east1"
 zone       = "us-east1-b"
 
-repo_owner  = "GoogleCloudPlatform"
+repo_owner  = "silvermx"
 sync_repo   = "bank-of-anthos"
 sync_branch = "main"
