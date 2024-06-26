@@ -82,7 +82,6 @@ To deploy the CI/CD pipeline, you need:
 Name: Demo Bank
 Url:https://github.com/
 Organization: Silver Organization
-Generated key: AIzaSyC2C9B-7HU37p1S5hqpD1r365xVhYkIV9g
 
 
 
