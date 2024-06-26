@@ -12,8 +12,7 @@ gsutil mb gs://${PROJECT_ID}-boa-tf-state
 gsutil versioning set on gs://${PROJECT_ID}-boa-tf-state
 
 # Add Cloud Admin role to the current account silvergcpcert@gmail.com
-gcloud projects add-iam-policy-binding ${PROJECT_ID}
-  --member="user:${PRINCIPAL}" --role=roles/storage.admin
+gcloud projects add-iam-policy-binding ${PROJECT_ID} --member="user:${PRINCIPAL}" --role=roles/storage.admin
 
 # Terraform infrastructure
 echo "--- Running Terraform Infrastructure"
