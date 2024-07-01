@@ -14,7 +14,7 @@
 
 terraform {
   backend "gcs" {
-    bucket = "bank-of-anthos-tf-state"
+    bucket = "active-dahlia-424818-m5-boa-tf-state"
     prefix = "bank-of-anthos"
   }
   required_providers {
