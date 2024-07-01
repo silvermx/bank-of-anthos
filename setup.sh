@@ -8,8 +8,8 @@ export DOMAIN="demobank.silver-en-irlanda.com"
 export PRINCIPAL="silvergcpcert@gmail.com"
 
 # Not sure if this si required
-echo "### Enableing Fleet mesh"
-gcloud container fleet mesh enable --project active-dahlia-424818-m5
+#echo "### Enableing Fleet mesh"
+#gcloud container fleet mesh enable --project active-dahlia-424818-m5
 
 # Terraform state folder
 echo "### Provisioning the infrastructure - Cloud Storage bucket"
