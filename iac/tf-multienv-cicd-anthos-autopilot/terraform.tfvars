@@ -13,8 +13,8 @@
 # limitations under the License.
 
 project_id = "active-dahlia-424818-m5"
-region     = "us-east1"
-zone       = "us-east1-b"
+region     = "us-central1"
+zone       = "us-central1-a"
 
 repo_owner  = "silvermx"
 sync_repo   = "bank-of-anthos"
