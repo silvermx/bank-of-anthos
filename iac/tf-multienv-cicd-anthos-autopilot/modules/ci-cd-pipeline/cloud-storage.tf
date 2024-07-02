@@ -39,7 +39,7 @@ resource "google_storage_bucket" "release_source_staging" {
   name                        = "release-source-staging-${local.service_name}-${data.google_project.project.number}"
   uniform_bucket_level_access = true
   location                    = var.region
-  depends_on = [null_resource.release_source_staging]
+  depends_on = [null_resource.check_bucket_exists_release_source_staging]
 }
 
 # Initialize cache with empty file
