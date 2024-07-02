@@ -17,5 +17,5 @@ region     = "us-central1"
 zone       = "us-central1-a"
 
 repo_owner  = "silvermx"
-sync_repo   = "bank-of-anthos-demo"
+sync_repo   = "bank-of-anthos"
 sync_branch = "free-demo"
