@@ -18,6 +18,13 @@ resource "google_service_account" "cloud_build" {
   account_id = "ci-${local.service_name}"
 }
 
+resource "google_project_iam_member" "logging_account_log_writer" { 
+project = var.project_id
+role = "roles/logging.logWriter" 
+member = "serviceAccount:${google_service_account.cloud_build.email}" 
+}
+
+
 # additional roles for cloud-build service account
 resource "google_artifact_registry_repository_iam_member" "cloud_build" {
   repository = var.container_registry.repository_id
