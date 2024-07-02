@@ -83,6 +83,11 @@ resource "google_clouddeploy_target" "production" {
   }
 }
 
+resource "null_resource" "check_bucket_exists_delivery_artifacts_staging" {
+    provisioner "local-exec" {
+        command = "gsutil ls -b gs://delivery-artifacts-staging-${data.google_project.project.number} || exit 0"
+    }
+}
 
 # GCS bucket used by Cloud Deploy for delivery artifact storage
 resource "google_storage_bucket" "delivery_artifacts_staging" {
@@ -90,6 +95,13 @@ resource "google_storage_bucket" "delivery_artifacts_staging" {
   name                        = "delivery-artifacts-staging-${data.google_project.project.number}"
   uniform_bucket_level_access = true
   location                    = var.region
+  depends_on = [null_resource.check_bucket_exists_delivery_artifacts_staging]
+}
+
+resource "null_resource" "check_bucket_exists_delivery_artifacts_production" {
+    provisioner "local-exec" {
+        command = "gsutil ls -b gs://delivery-artifacts-production-${data.google_project.project.number} || exit 0"
+    }
 }
 
 # GCS bucket used by Cloud Deploy for delivery artifact storage
@@ -98,6 +110,7 @@ resource "google_storage_bucket" "delivery_artifacts_production" {
   name                        = "delivery-artifacts-production-${data.google_project.project.number}"
   uniform_bucket_level_access = true
   location                    = var.region
+  depends_on = [null_resource.check_bucket_exists_delivery_artifacts_production]
 }
 
 # give CloudDeploy SA access to administrate to delivery artifact bucket
@@ -118,12 +131,19 @@ resource "google_storage_bucket_iam_member" "delivery_artifacts_production" {
 
 ### CI-PR pipeline
 
+resource "null_resource" "check_bucket_exists_build_cache_pr" {
+    provisioner "local-exec" {
+        command = "gsutil ls -b gs://build-cache-pr-${var.project_id} || exit 0"
+    }
+}
+
 # GCS bucket used as skaffold build cache
 resource "google_storage_bucket" "build_cache_pr" {
   name                        = "build-cache-pr-${var.project_id}"
   uniform_bucket_level_access = true
   location                    = var.region
   force_destroy               = true
+  depends_on = [null_resource.check_bucket_exists_build_cache_pr]
 }
 
 # Initialize cache with empty file
