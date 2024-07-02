@@ -18,6 +18,7 @@ resource "google_service_account" "cloud_build" {
   account_id = "ci-${local.service_name}"
 }
 
+# addinng permision to write to logs for troubleshooting
 resource "google_project_iam_member" "logging_account_log_writer" { 
 project = var.project_id
 role = "roles/logging.logWriter" 
