@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+/**
 # Cloud Foundation Toolkit GKE module requires cluster-specific kubernetes provider
 provider "kubernetes" {
   alias                  = "production"
@@ -223,3 +224,5 @@ resource "google_compute_ssl_policy" "production_ssl_policy" {
     module.enabled_google_apis,
   ]
 }
+
+**/
