@@ -162,6 +162,7 @@ resource "google_compute_global_address" "production_ip" {
   ]
 }
 
+/*
 resource "google_compute_security_policy" "production_security_policy" {
   name        = "bank-of-anthos-security-policy" # hardcoded in backendconfig k8s manifest
   description = "Block various attacks against bank of anthos production deployment"
@@ -224,3 +225,4 @@ resource "google_compute_ssl_policy" "production_ssl_policy" {
     module.enabled_google_apis,
   ]
 }
+*/
