@@ -32,6 +32,13 @@ resource "google_project_iam_member" "clouddeploy_operator" {
   member  = "serviceAccount:${google_service_account.cloud_build.email}"
 }
 
+# addinng permision to push an image to artifactory repo
+resource "google_project_iam_member" "cloudbuild_artifact_registry_admin" {
+  project = var.project_id
+  role    = "roles/artifactregistry.admin"
+  member  = "serviceAccount:${google_service_account.cloud_build.email}"
+}
+
 # additional roles for cloud-build service account
 resource "google_artifact_registry_repository_iam_member" "cloud_build" {
   repository = var.container_registry.repository_id
