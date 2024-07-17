@@ -40,6 +40,7 @@ resource "google_service_account" "cloud_deploy" {
   account_id = "cloud-deploy"
 }
 
+/** <Limit resources> Commented because the free account as limits for GKE
 resource "google_clouddeploy_target" "staging" {
   # one CloudDeploy target per target defined in vars
 
@@ -128,6 +129,7 @@ resource "google_storage_bucket_iam_member" "delivery_artifacts_production" {
   member = "serviceAccount:${google_service_account.cloud_deploy.email}"
   role   = "roles/storage.admin"
 }
+*/
 
 ### CI-PR pipeline
 
