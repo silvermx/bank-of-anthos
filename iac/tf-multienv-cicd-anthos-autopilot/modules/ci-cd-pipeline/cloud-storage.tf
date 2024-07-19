@@ -12,25 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-resource "null_resource" "check_bucket_exists_build_cache" {
-    provisioner "local-exec" {
-        command = "gsutil ls -b gs://build-cache-${local.service_name}-${data.google_project.project.number} || exit 0"
-    }
-}
-
 # GCS bucket used as skaffold build cache
 resource "google_storage_bucket" "build_cache" {
   project                     = var.project_id
   name                        = "build-cache-${local.service_name}-${data.google_project.project.number}"
   uniform_bucket_level_access = true
   location                    = var.region
-  depends_on = [null_resource.check_bucket_exists_build_cache]
-}
-
-resource "null_resource" "check_bucket_exists_release_source_staging" {
-    provisioner "local-exec" {
-        command = "gsutil ls -b gs://build-cache-${local.service_name}-${data.google_project.project.number} || exit 0"
-    }
+  force_destroy = true
 }
 
 # GCS bucket used by Cloud Build to stage sources for Cloud Deploy
@@ -39,7 +27,7 @@ resource "google_storage_bucket" "release_source_staging" {
   name                        = "release-source-staging-${local.service_name}-${data.google_project.project.number}"
   uniform_bucket_level_access = true
   location                    = var.region
-  depends_on = [null_resource.check_bucket_exists_release_source_staging]
+  force_destroy = true
 }
 
 # Initialize cache with empty file

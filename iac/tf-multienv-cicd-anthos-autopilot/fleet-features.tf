@@ -23,6 +23,11 @@ resource "google_gke_hub_feature" "asm" {
   depends_on = [
     module.enabled_google_apis
   ]
+
+  # Create the feature only if it doesn't exist
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # enable ACM feature on fleet

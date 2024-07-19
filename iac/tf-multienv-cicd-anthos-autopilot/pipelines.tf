@@ -86,11 +86,6 @@ resource "google_clouddeploy_target" "production" {
   }
 }
 */
-resource "null_resource" "check_bucket_exists_delivery_artifacts_staging" {
-    provisioner "local-exec" {
-        command = "gsutil ls -b gs://delivery-artifacts-staging-${data.google_project.project.number} || exit 0"
-    }
-}
 
 # GCS bucket used by Cloud Deploy for delivery artifact storage
 resource "google_storage_bucket" "delivery_artifacts_staging" {
@@ -98,15 +93,10 @@ resource "google_storage_bucket" "delivery_artifacts_staging" {
   name                        = "delivery-artifacts-staging-${data.google_project.project.number}"
   uniform_bucket_level_access = true
   location                    = var.region
-  depends_on = [null_resource.check_bucket_exists_delivery_artifacts_staging]
+  force_destroy = true
 }
 
-resource "null_resource" "check_bucket_exists_delivery_artifacts_production" {
-    provisioner "local-exec" {
-        command = "gsutil ls -b gs://delivery-artifacts-production-${data.google_project.project.number} || exit 0"
-    }
-}
-
+/* Disable production
 # GCS bucket used by Cloud Deploy for delivery artifact storage
 resource "google_storage_bucket" "delivery_artifacts_production" {
   project                     = var.project_id
@@ -115,6 +105,7 @@ resource "google_storage_bucket" "delivery_artifacts_production" {
   location                    = var.region
   depends_on = [null_resource.check_bucket_exists_delivery_artifacts_production]
 }
+*/
 
 # give CloudDeploy SA access to administrate to delivery artifact bucket
 resource "google_storage_bucket_iam_member" "delivery_artifacts_staging" {
@@ -124,6 +115,7 @@ resource "google_storage_bucket_iam_member" "delivery_artifacts_staging" {
   role   = "roles/storage.admin"
 }
 
+/* Disable production
 # give CloudDeploy SA access to administrate to delivery artifact bucket
 resource "google_storage_bucket_iam_member" "delivery_artifacts_production" {
   bucket  = google_storage_bucket.delivery_artifacts_production.name
@@ -131,14 +123,9 @@ resource "google_storage_bucket_iam_member" "delivery_artifacts_production" {
   member = "serviceAccount:${google_service_account.cloud_deploy.email}"
   role   = "roles/storage.admin"
 }
+*/
 
 ### CI-PR pipeline
-
-resource "null_resource" "check_bucket_exists_build_cache_pr" {
-    provisioner "local-exec" {
-        command = "gsutil ls -b gs://build-cache-pr-${var.project_id} || exit 0"
-    }
-}
 
 # GCS bucket used as skaffold build cache
 resource "google_storage_bucket" "build_cache_pr" {
@@ -146,7 +133,6 @@ resource "google_storage_bucket" "build_cache_pr" {
   uniform_bucket_level_access = true
   location                    = var.region
   force_destroy               = true
-  depends_on = [null_resource.check_bucket_exists_build_cache_pr]
 }
 
 # Initialize cache with empty file
