@@ -1,5 +1,3 @@
-/** <Limit resources> Commented because the free account as limits for GKE
-
 # Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -155,4 +153,3 @@ resource "google_gke_hub_feature_membership" "acm_staging" {
   }
   provider = google-beta
 }
-*/

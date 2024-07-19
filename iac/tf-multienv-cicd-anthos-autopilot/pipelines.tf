@@ -25,7 +25,9 @@ module "ci-cd-pipeline" {
   repo_owner = var.repo_owner
   repo_name = var.sync_repo
   service = each.value
-  targets = [google_clouddeploy_target.staging, google_clouddeploy_target.production]
+  targets = [google_clouddeploy_target.staging]
+  //<Limited resources>
+  //targets = [google_clouddeploy_target.staging, google_clouddeploy_target.production] 
   repo_branch = var.sync_branch
   cloud_deploy_sa = google_service_account.cloud_deploy
 
@@ -40,7 +42,6 @@ resource "google_service_account" "cloud_deploy" {
   account_id = "cloud-deploy"
 }
 
-/** <Limit resources> Commented because the free account as limits for GKE
 resource "google_clouddeploy_target" "staging" {
   # one CloudDeploy target per target defined in vars
 
@@ -62,6 +63,7 @@ resource "google_clouddeploy_target" "staging" {
   }
 }
 
+/** <Limit resources> Commented because the free account as limits for GKE
 resource "google_clouddeploy_target" "production" {
   # one CloudDeploy target per target defined in vars
 
@@ -83,7 +85,7 @@ resource "google_clouddeploy_target" "production" {
     ]
   }
 }
-
+*/
 resource "null_resource" "check_bucket_exists_delivery_artifacts_staging" {
     provisioner "local-exec" {
         command = "gsutil ls -b gs://delivery-artifacts-staging-${data.google_project.project.number} || exit 0"
@@ -129,7 +131,6 @@ resource "google_storage_bucket_iam_member" "delivery_artifacts_production" {
   member = "serviceAccount:${google_service_account.cloud_deploy.email}"
   role   = "roles/storage.admin"
 }
-*/
 
 ### CI-PR pipeline
 
