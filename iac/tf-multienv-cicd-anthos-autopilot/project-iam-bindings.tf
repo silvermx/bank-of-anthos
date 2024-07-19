@@ -20,20 +20,20 @@ module "project-iam-bindings" {
 
   bindings = {
     "roles/cloudtrace.agent" = [
-      "serviceAccount:${google_service_account.gke_workload_development.email}",
+#      "serviceAccount:${google_service_account.gke_workload_development.email}",
       "serviceAccount:${google_service_account.gke_workload_staging.email}",
 #      "serviceAccount:${google_service_account.gke_workload_production.email}",
       "serviceAccount:${data.google_project.project.number}-compute@developer.gserviceaccount.com"
     ],
     "roles/monitoring.metricWriter" = [
-      "serviceAccount:${google_service_account.gke_workload_development.email}",
+#      "serviceAccount:${google_service_account.gke_workload_development.email}",
       "serviceAccount:${google_service_account.gke_workload_staging.email}",
 #      "serviceAccount:${google_service_account.gke_workload_production.email}",
       "serviceAccount:${data.google_project.project.number}-compute@developer.gserviceaccount.com"
     ],
     "roles/logging.logWriter" = setunion(
       [
-        "serviceAccount:${google_service_account.gke_workload_development.email}",
+#        "serviceAccount:${google_service_account.gke_workload_development.email}",
         "serviceAccount:${google_service_account.gke_workload_staging.email}",
 #        "serviceAccount:${google_service_account.gke_workload_production.email}",
         "serviceAccount:${google_service_account.cloud_build_pr.email}",
