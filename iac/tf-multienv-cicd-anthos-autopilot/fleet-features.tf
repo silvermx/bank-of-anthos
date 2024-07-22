@@ -1,4 +1,3 @@
-/** Commented it fails when it tries to start, it 
 
 # Copyright 2022 Google LLC
 #
@@ -44,5 +43,3 @@ resource "google_gke_hub_feature" "acm" {
     module.enabled_google_apis
   ]
 }
-
-*/
