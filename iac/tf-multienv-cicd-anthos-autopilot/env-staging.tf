@@ -55,8 +55,8 @@ module "gke_staging" {
     module.enabled_google_apis,
     module.network,
 # Commented as it failes because it already exists
-    google_gke_hub_feature.asm,
-    google_gke_hub_feature.acm
+#    google_gke_hub_feature.asm,
+#    google_gke_hub_feature.acm
   ]
 }
 
@@ -127,6 +127,7 @@ resource "google_gke_hub_membership" "staging" {
   }
 }
 
+/** Commented it fails when it tries to start, it 
 # configure ASM for staging GKE cluster
 resource "google_gke_hub_feature_membership" "asm_staging" {
   project  = var.project_id
@@ -160,3 +161,5 @@ resource "google_gke_hub_feature_membership" "acm_staging" {
   }
   provider = google-beta
 }
+
+*/
