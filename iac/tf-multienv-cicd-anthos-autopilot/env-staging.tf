@@ -60,11 +60,6 @@ module "gke_staging" {
   ]
 }
 
-resource "kubernetes_namespace" "gke_staging_namespace" {
-  metadata {
-    name = "bank-of-anthos-staging"
-  }
-}
 
 # staging GKE workload GSA
 resource "google_service_account" "gke_workload_staging" {
