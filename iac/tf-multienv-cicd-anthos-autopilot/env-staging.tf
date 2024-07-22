@@ -121,6 +121,7 @@ resource "google_gke_hub_membership" "staging" {
   }
 }
 
+/** Commented it fails when it tries to start, it 
 # configure ASM for staging GKE cluster
 resource "google_gke_hub_feature_membership" "asm_staging" {
   project  = var.project_id
@@ -154,3 +155,5 @@ resource "google_gke_hub_feature_membership" "acm_staging" {
   }
   provider = google-beta
 }
+
+*/
