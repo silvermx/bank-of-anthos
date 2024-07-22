@@ -54,7 +54,8 @@ module "gke_staging" {
   depends_on = [
     module.enabled_google_apis,
     module.network,
-    google_gke_hub_feature.asm,
+# Commented as it failes because it already exists
+#    google_gke_hub_feature.asm,
     google_gke_hub_feature.acm
   ]
 }
