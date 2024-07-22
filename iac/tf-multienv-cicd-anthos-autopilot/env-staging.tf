@@ -56,7 +56,7 @@ module "gke_staging" {
     module.network,
 # Commented as it failes because it already exists
 #    google_gke_hub_feature.asm,
-    google_gke_hub_feature.acm
+#    google_gke_hub_feature.acm
   ]
 }
 
